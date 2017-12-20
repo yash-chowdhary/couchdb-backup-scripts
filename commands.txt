@@ -1,0 +1,5 @@
+couchbackup --url https://hereesightertyreatiumbor:e557bfc9bf02bd35bee9bc613fba15ef432d43a6@vaultdragon.cloudant.com/ --db database_backup_test > backup_scripttest.txt
+
+powershell -Command "(gc backup_scripttest.txt) -replace '_attachments', '$attachments' | Out-File backup_scripttest1.txt"
+
+cat backup_scripttest1.txt | couchrestore --url http://localhost:5984/ --db test_db_3
