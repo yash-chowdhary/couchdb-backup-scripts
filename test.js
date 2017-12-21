@@ -16,6 +16,7 @@ function(res){
 		var object = JSON.parse(body);
 		for(let i=0;i<35;i++){
 			if(object.rows[i].id.substring(0,1) != '_'){        //filters out ones that don't have nested databases
+				
 				if(object.rows[i].doc.hasOwnProperty('cms')){   //filters out the ones that have cms & dragonfly databases
 					var cmsDbUrl = 'http://localhost:5984/' + object.rows[i].doc.cms.cloudantDatabase.toString();
 					var dragonflyDbUrl = 'http://localhost:5984/' + object.rows[i].doc.dragonfly.cloudantDatabase.toString();
@@ -32,10 +33,11 @@ function(res){
 						console.log('db added');
 					})
 				}   else{
-						var remote_db = new PouchDB('http://localhost:5984/'+object.rows[i].doc.cloudantDatabase);
-						remote_db.info().then(function (info) {
-							console.log('db added');
-						})
+						
+					var remote_db = new PouchDB('http://localhost:5984/'+object.rows[i].doc.cloudantDatabase);
+					remote_db.info().then(function (info) {
+						console.log('db added');
+					})
 				}
 			}
 		}

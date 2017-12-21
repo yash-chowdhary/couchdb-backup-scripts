@@ -1,11 +1,11 @@
-var requestModule = require('./request');
-console.log(requestModule.name);
-// if(requestModule.isCorrupt === false){
-// 	console.log('false');
-// }
-// else {
-// 	console.log('sfs');
-// }
+// var requestModule = require('./request');
+// console.log(requestModule.name);
+// // if(requestModule.isCorrupt === false){
+// // 	console.log('false');
+// // }
+// // else {
+// // 	console.log('sfs');
+// // }
 var AWS = require('aws-sdk'),
 fs = require('fs');
 var param = process.argv[2];

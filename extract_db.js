@@ -29,28 +29,28 @@ function(res){
                     var dragonfly_cmdCommand_backup = 'couchbackup --url https://'+ object.rows[i].doc.dragonfly.cloudantUsername + ':' + object.rows[i].doc.dragonfly.cloudantPassword
                     + '@vaultdragon.cloudant.com/ --db ' + object.rows[i].doc.dragonfly.cloudantDatabase + ' > ' + dragonflyBackupFileName;
 
-                    console.log(dragonfly_cmdCommand_backup);
+                    console.log(cms_cmdCommand_backup);
                     //call couchbackup                    
                     cmd.get(cms_cmdCommand_backup,function(){
-                        console.log('(cmd) backup complete.');
+                        console.log('(cms) backup complete: '+object.rows[i].doc.cms.cloudantDatabase);
                     })
 
-                    if(i===3){
-                        continue;
-                    }   else{
+                    // if(i!=3){
+                        console.log(dragonfly_cmdCommand_backup);
                         cmd.get(dragonfly_cmdCommand_backup,function(){
-                            console.log('(dragonfly) backup complete.');
+                            console.log('(dragonfly) backup complete: '+object.rows[i].doc.dragonfly.cloudantDatabase);
                         })   
-                    }             
+                    // }             
                 }   else{
                     
                     var backupFileName = object.rows[i].doc.cloudantDatabase.toString()+'.txt';
                     var cmdCommand_backup = 'couchbackup --url https://'+ object.rows[i].doc.cloudantUsername + ':' + object.rows[i].doc.cloudantPassword
                     + '@vaultdragon.cloudant.com/ --db ' + object.rows[i].doc.cloudantDatabase + ' > ' + backupFileName;
-                    
+
+                    console.log(cmdCommand_backup);
                     //call couchbackup
                     cmd.get(cmdCommand_backup,function(err,data,stderr){
-                        console.log('backup complete.');
+                        console.log('backup complete: '+object.rows[i].doc.cloudantDatabase);
                     })
 
                 }
