@@ -15,8 +15,8 @@ function(res){
         for(let i=0;i<35;i++){
             if(object.rows[i].id.substring(0,1) != '_'){        //filters out ones that don't have nested databases
                 if(object.rows[i].doc.hasOwnProperty('cms')){   //filters out the ones that have cms & dragonfly databases
-                    var cmsBackupFileName = object.rows[i].doc.cms.cloudantDatabase.toString()+'.txt';
-                    var dragonflyBackupFileName = object.rows[i].doc.dragonfly.cloudantDatabase.toString()+'.txt';
+                    var cmsBackupFileName = 'decrypted_'+object.rows[i].doc.cms.cloudantDatabase.toString()+'.txt';
+                    var dragonflyBackupFileName = 'decrypted_'+object.rows[i].doc.dragonfly.cloudantDatabase.toString()+'.txt';
                     
                     var cms_cmdCommand_restore = 'testscript.sh '+cmsBackupFileName+' '+object.rows[i].doc.cms.cloudantDatabase.toString();
                     
@@ -35,7 +35,7 @@ function(res){
                     }             
                 }   else{
                     
-                    var backupFileName = object.rows[i].doc.cloudantDatabase.toString()+'.txt';
+                    var backupFileName = 'decrypted_'+object.rows[i].doc.cloudantDatabase.toString()+'.txt';
                     var cmdCommand_restore = 'testscript.sh '+backupFileName+' '+object.rows[i].doc.cloudantDatabase.toString();
                     
                     //call couchbackup
