@@ -1,7 +1,11 @@
 var CronJob = require('cron').CronJob;
 var cmd = require('node-cmd');
 
-// // customJob will run everyday from 7 AM to 7PM with 1 hour intervals 
+var param_username = process.argv[2].toString();
+var param_password = process.argv[3].toString();
+var param_dbname = process.argv[4].toString();
+
+// // customJob will run everyday from 7 AM to 7PM at 1 hour intervals 
 // var customJob = new CronJob('0 7-19 * * *', function(){
 //     console.log("running customJob now...");
 //     cmd.get('run.sh', function(err,data,stderr){
@@ -25,7 +29,7 @@ var cmd = require('node-cmd');
 
 var job = new CronJob('*/6 * * * *',function(){
     console.log("running now...");
-    cmd.get('run.sh', function(err,data,stderr){
+    cmd.get('run.sh ' + param_username + ' ' + param_password + ' ' + param_dbname, function(err,data,stderr){
         console.log(data);
     });
 },

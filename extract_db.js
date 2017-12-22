@@ -2,12 +2,14 @@ var http = require('http');
 var https = require('https');
 var cmd = require('node-cmd');
 
-var param = process.argv[2];
+var param_username = process.argv[2].toString();
+var param_password = process.argv[3].toString();
+var param_dbname = process.argv[4].toString();
 
 var body ='';
 var json;
 var obj;
-var request = https.get("https://manareasedinguallyarthei:546b7799281fc1eb8836d7f509d7cbaac24c375c@vaultdragon.cloudant.com/vaultdragon/_all_docs?include_docs=true",
+var request = https.get("https://"+param_username+":"+param_password+"@vaultdragon.cloudant.com/"+param_dbname+"/_all_docs?include_docs=true",
 function(res){
     res.on('data', function(chunk){
         body+=chunk;

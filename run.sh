@@ -1,9 +1,11 @@
 #!/bin/sh
 
-node extract_db.js
+node test.js $1 $2 $3
 
-node replace.js
+node extract_db.js $1 $2 $3
 
-node restore.js
+node replace.js $1 $2 $3
 
-node request_helper.js
+node restore.js $1 $2 $3
+
+node request_helper.js $1 $2 $3
