@@ -6,15 +6,11 @@ var datetime = require('node-datetime');
 var dt = datetime.create();
 var formatted = dt.format('d-m-Y||H:M:S').toString();
 
-// var unique = require('node-unique');
-// console.log(unique());
-
 var db_name = ''; 
-db_name += param.substring(0,param.length-4);
+db_name += param.substring(10,param.length-4);
 
 var bucketName = 'vd-cms-backup';
 var key = db_name+'/'+formatted+'_'+param;
-console.log(key); 
 
 // var writestream = fs.createWriteStream('log.txt', {'flags': 'a'});
 AWS.config.update({ accessKeyId: 'AKIAJRZBGKXVR2IIOENA', secretAccessKey: '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' });

@@ -8,6 +8,7 @@ var body_request = '';
 var body_source = '';
 var body_mydb = '';
 var id_string='';
+var fileName;
 
 var param_username = process.argv[2].toString();
 var param_password = process.argv[3].toString();
@@ -51,6 +52,8 @@ function callFunction(json_source){
         body_mydb=data.toString();
         body_mydb = body_mydb.trim();
         var json_local = JSON.parse(body_mydb);
+        fileName = 'encrypted_'+param_dbname+'.txt';
+
         if(JSON.stringify(json_local) ===JSON.stringify(json_source)){
             
             // var AWS = require('aws-sdk'),
@@ -86,16 +89,14 @@ function callFunction(json_source){
             //         }
             //     });
             // });
-            var fileName = param_dbname+'.txt';
+            // fileName = 'encrypted_'+param_dbname+'.txt';
             var cmdCommand = 'uploader.sh '+fileName;
             cmd.get(cmdCommand,function(){
                 console.log("complete: "+fileName);
             });
                         
         }   else{
-            // let isCorrupt = true;
-            // module.exports.isCorrupt = true;
-            console.log("isCorrupt. Not uploaded onto AWS: "+param_dbname+'.txt');
+            console.log("isCorrupt. Not uploaded onto AWS: "+fileName);
             // fileStream1.end("isCorrupt. Not uploaded onto AWS: "+param_dbname+'.txt\n');
         }
     });
