@@ -62,3 +62,5 @@ function(res){
         }
     });
 })
+
+module.exports = apps;
