@@ -16,5 +16,5 @@ var cmdCommand_backup = 'couchbackup --url https://'+ param_username + ':' + par
 console.log(cmdCommand_backup);
 //call couchbackup
 cmd.get(cmdCommand_backup,function(err,data,stderr){
-    console.log('backup complete: '+object.rows[i].doc.cloudantDatabase);
+    console.log('backup complete: '+param_dbname);
 });
