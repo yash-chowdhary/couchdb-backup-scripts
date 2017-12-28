@@ -1,0 +1,11 @@
+#!/bin/sh
+
+node extract_db.js manareasedinguallyarthei 546b7799281fc1eb8836d7f509d7cbaac24c375c vaultdragon 0 A 5984
+
+node extract_db.js manareasedinguallyarthei 546b7799281fc1eb8836d7f509d7cbaac24c375c vaultdragon 4 A 5984
+
+node extract_db.js manareasedinguallyarthei 546b7799281fc1eb8836d7f509d7cbaac24c375c vaultdragon 6 A 5984
+
+node extract_db.js manareasedinguallyarthei 546b7799281fc1eb8836d7f509d7cbaac24c375c vaultdragon 8 A 5984
+
+node extract_db.js manareasedinguallyarthei 546b7799281fc1eb8836d7f509d7cbaac24c375c vaultdragon 34 A 5984
