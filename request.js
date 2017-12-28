@@ -13,6 +13,7 @@ var fileName;
 var param_username = process.argv[2].toString();
 var param_password = process.argv[3].toString();
 var param_dbname = process.argv[4].toString();
+var portNumber = process.argv[5].toString();
 
 var request = https.get("https://"+param_username+":"+param_password+"@vaultdragon.cloudant.com/"+param_dbname+"/_changes?descending=true&limit=1",
                 function(res){
@@ -21,9 +22,9 @@ var request = https.get("https://"+param_username+":"+param_password+"@vaultdrag
                     });
                     res.on('end',function(){
                         body_request = body_request.trim();
-                        console.log(body_request);
+                        // console.log(body_request);
                         var object = JSON.parse(body_request);
-                        console.log(object.results[0].id);
+                        console.log(object);
                         id = object.results[0].id;
                         callFunction1();
                     });
@@ -31,7 +32,7 @@ var request = https.get("https://"+param_username+":"+param_password+"@vaultdrag
                 
 function callFunction1(){
     id_string = id.toString();
-    // console.log(id_string);
+    console.log(id_string);
     var request = https.get("https://"+param_username+":"+param_password+"@vaultdragon.cloudant.com/"+param_dbname+"/"+ id_string,
     function(res){
         res.on('data', function (chunk) {
@@ -40,6 +41,7 @@ function callFunction1(){
         res.on('end',function(){
             body_source = body_source.trim();
             var json_source = JSON.parse(body_source);
+            console.log(json_source);
             callFunction(json_source);
         });
     })
@@ -47,7 +49,8 @@ function callFunction1(){
 
 
 function callFunction(json_source){
-    var command = 'curl -X GET http://localhost:5984/'+param_dbname+'/'+id_string;
+    var command = 'curl -X GET http://localhost:'+portNumber+'/'+param_dbname+'/'+id_string;
+    console.log(command);
     cmd.get(command,function(err, data, stderr){
         body_mydb=data.toString();
         body_mydb = body_mydb.trim();

@@ -13,6 +13,7 @@ var backupFileName_enc = 'encrypted_'+param_dbname+'.txt';
 var backupFileName_dec = 'decrypted_'+param_dbname+'.txt';
 
 var cmdCommand_decrypt = 'openssl aes-128-cbc -d -in '+backupFileName_enc +' -pass pass:vaultdragon -out '+backupFileName_dec;
+console.log(cmdCommand_decrypt);
 cmd.get(cmdCommand_decrypt,function(err,data,stderr){
     cmd.run('replacescript.sh ' + backupFileName_dec);
 });

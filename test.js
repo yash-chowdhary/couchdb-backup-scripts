@@ -8,6 +8,7 @@ const couchbackup = require('@cloudant/couchbackup');
 var param_username = process.argv[2].toString();
 var param_password = process.argv[3].toString();
 var param_dbname = process.argv[4].toString();
+var portNumber = process.argv[5].toString();
 
 var body='';
 var request = https.get("https://"+param_username+":"+param_password+"@vaultdragon.cloudant.com/"+param_dbname+"/_all_docs?include_docs=true",
@@ -18,12 +19,12 @@ function(res){
 	res.on('end',function(){
 		body = body.trim();
 		var object = JSON.parse(body);
-		for(let i=0;i<35;i++){
+		for(let i=0;i<object.total_rows;i++){
 			if(object.rows[i].id.substring(0,1) != '_'){        //filters out ones that don't have nested databases
 				
 				if(object.rows[i].doc.hasOwnProperty('cms')){   //filters out the ones that have cms & dragonfly databases
-					var cmsDbUrl = 'http://localhost:5984/' + object.rows[i].doc.cms.cloudantDatabase.toString();
-					var dragonflyDbUrl = 'http://localhost:5984/' + object.rows[i].doc.dragonfly.cloudantDatabase.toString();
+					var cmsDbUrl = 'http://localhost:'+portNumber+'/' + object.rows[i].doc.cms.cloudantDatabase.toString();
+					var dragonflyDbUrl = 'http://localhost:'+portNumber+'/' + object.rows[i].doc.dragonfly.cloudantDatabase.toString();
 					console.log(cmsDbUrl);
 					console.log(dragonflyDbUrl);
 					
@@ -38,7 +39,7 @@ function(res){
 					})
 				}   else{
 						
-					var remote_db = new PouchDB('http://localhost:5984/'+object.rows[i].doc.cloudantDatabase);
+					var remote_db = new PouchDB('http://localhost:'+portNumber+'/'+object.rows[i].doc.cloudantDatabase);
 					remote_db.info().then(function (info) {
 						console.log('db added');
 					})
